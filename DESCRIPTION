@@ -21,6 +21,7 @@ Imports:
     jsonlite,
     magrittr,
     readr,
+    readsdr,
     rjson,
     rlang,
     shiny,

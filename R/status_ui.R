@@ -1,4 +1,4 @@
-#' Shiny UI for Resilient Community Overview page
+#' Shiny UI for Resilient Community Status page
 #'
 #' Intended to be used in status_app, player_app, and control_app.
 #' 
