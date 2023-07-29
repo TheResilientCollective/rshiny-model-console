@@ -19,8 +19,19 @@ model_editor_ui <- function(id) {
   shiny::fluidRow(
     shiny::column(
       3,
-      fileInput(ns("model_file"), "Choose Model File", accept = ".xmile"),
-      
+      shiny::actionButton(ns("uploadButton"),
+                          label = "New Model",
+                          icon = shiny::icon("upload")
+      ),
+      shiny::downloadButton(ns("downloadButton"), label = "Download"),
+      shiny::actionButton(ns("mergeButton"),
+                          label = "Merge",
+                          icon = shiny::icon("code-merge")
+      ),
+      shiny::actionButton(ns("revertButton"),
+                          label = "Revert",
+                          icon = shiny::icon("clock-rotate-left")
+      ),
       sliderInput(ns("misinformation_capacity"),
                   "Misinformation Capacity",
                   min = 0,

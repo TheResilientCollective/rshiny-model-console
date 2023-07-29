@@ -1,71 +1,75 @@
 app_id = "controller"
 
 #' Control App UI
-ui <- shinydashboard::dashboardPage(
-  title = "Resilient Community Model",
-  skin = "red",
-  shinydashboard::dashboardHeader(
-    title = "Resilient Community Model", 
-    titleWidth = 300
-  ),
-  shinydashboard::dashboardSidebar(
-    shinydashboard::sidebarMenu(
-      shinydashboard::menuItem(
-        "Edit Model",
-        tabName = "model_editor",
-        icon = shiny::icon("sliders"),
-        badgeColor = "red"
-      ),
-      shinydashboard::menuItem(
-        "Edit Newsfeed",
-        tabName = "newsfeed_editor",
-        icon = shiny::icon("pen-to-square"),
-        badgeColor = "red"
-      ),
-      shinydashboard::menuItem(
-        "Status",
-        tabName = "status_viewer",
-        icon = shiny::icon("chart-simple"),
-        badgeColor = "green"
+ui <- tagList(
+  # This is required for enable/disable on buttons, has to be at the top level.
+  shinyjs::useShinyjs(),
+  shinydashboard::dashboardPage(
+    title = "Resilient Community Model",
+    skin = "red",
+    shinydashboard::dashboardHeader(
+      title = "Resilient Community Model", 
+      titleWidth = 300
+    ),
+    shinydashboard::dashboardSidebar(
+      shinydashboard::sidebarMenu(
+        shinydashboard::menuItem(
+          "Edit Model",
+          tabName = "model_editor",
+          icon = shiny::icon("sliders"),
+          badgeColor = "red"
         ),
-      shinydashboard::menuItem(
-        "Newsfeed",
-        tabName = "newsfeed_viewer",
-        icon = shiny::icon("newspaper"),
-        badgeColor = "green"
+        shinydashboard::menuItem(
+          "Edit Newsfeed",
+          tabName = "newsfeed_editor",
+          icon = shiny::icon("pen-to-square"),
+          badgeColor = "red"
         ),
-      collapse = TRUE
-    ) # sidebarMenu
-  ), # dashboardSidebar
-
-  shinydashboard::dashboardBody(
-    shinydashboard::tabItems(
-      shinydashboard::tabItem(tabName = "model_editor",
-                                model_editor_ui(app_id)
-                              ),
-      shinydashboard::tabItem(tabName = "newsfeed_editor",
-                              h2("Newsfeed Editor Content")),
-      shinydashboard::tabItem(
-        tabName = "status_viewer",
-        # TEMPORARY: To test "publish"
-        shiny::fluidPage(
-          shiny::fluidRow(
-            shiny::sliderInput(
-              "confirmed_cases",
-              "EXAMPLE: Confirmed Cases Status",
-              min = 0,
-              max = 10000000,
-              step = 100,
-              value = 235676
-            )
+        shinydashboard::menuItem(
+          "Status",
+          tabName = "status_viewer",
+          icon = shiny::icon("chart-simple"),
+          badgeColor = "green"
           ),
-          fluidRow(status_ui(app_id))
-        )
-      ),
-      shinydashboard::tabItem(tabName = "newsfeed_viewer", 
-                              newsfeed_ui(app_id))
-    ) # tabItems
-  ) # dashboardBody
+        shinydashboard::menuItem(
+          "Newsfeed",
+          tabName = "newsfeed_viewer",
+          icon = shiny::icon("newspaper"),
+          badgeColor = "green"
+          ),
+        collapse = TRUE
+      ) # sidebarMenu
+    ), # dashboardSidebar
+  
+    shinydashboard::dashboardBody(
+      shinydashboard::tabItems(
+        shinydashboard::tabItem(tabName = "model_editor",
+                                  model_editor_ui(app_id)
+                                ),
+        shinydashboard::tabItem(tabName = "newsfeed_editor",
+                                h2("Newsfeed Editor Content")),
+        shinydashboard::tabItem(
+          tabName = "status_viewer",
+          # TEMPORARY: To test "publish"
+          shiny::fluidPage(
+            shiny::fluidRow(
+              shiny::sliderInput(
+                "confirmed_cases",
+                "EXAMPLE: Confirmed Cases Status",
+                min = 0,
+                max = 10000000,
+                step = 100,
+                value = 235676
+              )
+            ),
+            fluidRow(status_ui(app_id))
+          )
+        ),
+        shinydashboard::tabItem(tabName = "newsfeed_viewer", 
+                                newsfeed_ui(app_id))
+      ) # tabItems
+    ) # dashboardPage
+  ) # tagList
 )
 
 server <- function(input, output, session) {
