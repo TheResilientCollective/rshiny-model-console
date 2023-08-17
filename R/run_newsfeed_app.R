@@ -5,6 +5,6 @@
 #' @export
 run_newsfeed_app <- function() {
   shiny::runApp(
-    appDir = system.file("newsfeed_app", package="resilientgames")
+    appDir = system.file("apps/newsfeed", package="resilientgames")
   )
 }

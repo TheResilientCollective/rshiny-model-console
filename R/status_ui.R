@@ -5,6 +5,7 @@
 #' @family Status Modules
 #' 
 #' @param id  Application identifier for namespace.
+#' @export
 status_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::fluidPage(

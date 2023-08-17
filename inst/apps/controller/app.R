@@ -1,3 +1,5 @@
+# This ensures we can find our R scripts from shiny-server
+
 app_id = "controller"
 
 #' Control App UI
@@ -44,7 +46,7 @@ ui <- tagList(
     shinydashboard::dashboardBody(
       shinydashboard::tabItems(
         shinydashboard::tabItem(tabName = "model_editor",
-                                  model_editor_ui(app_id)
+                                resilientgames::model_editor_ui(app_id)
                                 ),
         shinydashboard::tabItem(tabName = "newsfeed_editor",
                                 h2("Newsfeed Editor Content")),
@@ -62,11 +64,11 @@ ui <- tagList(
                 value = 235676
               )
             ),
-            fluidRow(status_ui(app_id))
+            fluidRow(resilientgames::status_ui(app_id))
           )
         ),
         shinydashboard::tabItem(tabName = "newsfeed_viewer", 
-                                newsfeed_ui(app_id))
+                                resilientgames::newsfeed_ui(app_id))
       ) # tabItems
     ) # dashboardPage
   ) # tagList
@@ -75,15 +77,15 @@ ui <- tagList(
 server <- function(input, output, session) {
 
   status <- shiny::reactiveValues(confirmed_cases=0)
-  status_server(app_id, shiny::reactive(status))
+  resilientgames::status_server(app_id, shiny::reactive(status))
   feed <- shiny::reactiveValues(
     title = "Progress",
     message = "You're doing great!",
     icon = shiny::icon("thumbs-up", lib = "glyphicon"),
     color = "purple"
   )
-  newsfeed_server(app_id, shiny::reactive(feed))
-  model_editor_server(app_id)
+  resilientgames::newsfeed_server(app_id, shiny::reactive(feed))
+  resilientgames::model_editor_server(app_id)
 
   shiny::observeEvent(input$confirmed_cases, {
     status$confirmed_cases <- input$confirmed_cases

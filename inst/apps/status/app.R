@@ -10,12 +10,12 @@ ui <- shinydashboard::dashboardPage(
                                   titleWidth = 300),
   shinydashboard::dashboardSidebar(disable = TRUE),
   shinydashboard::dashboardBody(
-    status_ui(app_id)
+    resilientgames::status_ui(app_id)
   )
 )
 
 server <- function(input, output, session) {
-  status_server(app_id)
+  resilientgames::status_server(app_id)
 }
 
 shiny::shinyApp(ui, server)

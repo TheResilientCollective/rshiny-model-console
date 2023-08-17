@@ -2,7 +2,7 @@
 % Please edit documentation in R/status_ui.R
 \name{status_ui}
 \alias{status_ui}
-\title{Shiny UI for Resilient Community Overview page}
+\title{Shiny UI for Resilient Community Status page}
 \usage{
 status_ui(id)
 }

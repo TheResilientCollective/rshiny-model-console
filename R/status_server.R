@@ -6,6 +6,7 @@
 #' 
 #' @param id  Application identifier for namespace.
 #' @param reactive_status Override persistent storage with a reactive object
+#' @export
 status_server <- function(id, reactive_status = NULL) {
   shiny::moduleServer(
     id,

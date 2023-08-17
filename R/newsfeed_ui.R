@@ -5,6 +5,7 @@
 #' @family Newsfeed Modules
 #' 
 #' @param id  Application identifier for namespace.
+#' @export
 newsfeed_ui <- function(id) {
   ns = shiny::NS(id)
   shiny::fluidPage(

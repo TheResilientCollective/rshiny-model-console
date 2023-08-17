@@ -7,6 +7,7 @@
 #' 
 #' @param id  Application identifier for namespace.
 #' @param reactive_feed Override persistent storage with a reactive object
+#' @export
 newsfeed_server <- function(id, reactive_feed=NULL) {
 
   shiny::moduleServer(
