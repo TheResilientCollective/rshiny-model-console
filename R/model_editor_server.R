@@ -3,6 +3,7 @@
 #' @family Controller Modules
 #' 
 #' @param id  Application identifier for namespace.
+#' @export
 model_editor_server <- function(id) {
   shiny::moduleServer(
     id,
@@ -13,12 +14,12 @@ model_editor_server <- function(id) {
                                         xmile_file_path = NULL)
       rv_changed <- shiny::reactiveVal(FALSE)
 
-      observeEvent(rv_changed(), {
+      shiny::observeEvent(rv_changed(), {
         shinyjs::toggleState("mergeButton", condition = rv_changed())
         shinyjs::toggleState("revertButton", condition = rv_changed())
       })
       # This one depends on everything...
-      observe({
+      shiny::observe({
         shinyjs::toggleState(
           "downloadButton", 
           condition = !(is.null(rv_model$cur_params) | rv_changed())
@@ -36,11 +37,11 @@ model_editor_server <- function(id) {
 
       shiny::observeEvent(input$uploadButton, {
         tags <- shiny::tagList(
-          fileInput(session$ns("upload_filename"), 
-                    "Choose Model File", 
-                    accept = ".xmile")
+          shiny::fileInput(session$ns("upload_filename"), 
+                           "Choose Model File", 
+                           accept = ".xmile")
         )
-        if (!is.null(isolate(rv_model$cur_params))) {
+        if (!is.null(shiny::isolate(rv_model$cur_params))) {
           tags <- shiny::tagAppendChild(
             tags,
             shiny::strong(
@@ -55,7 +56,7 @@ model_editor_server <- function(id) {
       shiny::observeEvent(input$upload_filename, {
         file <- input$upload_filename
 
-        req(file)
+        shiny::req(file)
         
         parsed <- readsdr::read_xmile_constants(file$datapath)
         rv_model$cur_params <- parsed$constants
@@ -68,7 +69,7 @@ model_editor_server <- function(id) {
         shiny::removeModal()
       })
 
-      output$downloadButton <- downloadHandler(
+      output$downloadButton <- shiny::downloadHandler(
         filename = function() {
           sub(".xmile", "_modified.xmile", rv_model$xmile_file_path)
         },
@@ -79,11 +80,11 @@ model_editor_server <- function(id) {
             duration = NULL,
             closeButton = FALSE
           )
-          on.exit(removeNotification(notification_id), add = TRUE)
+          on.exit(shiny::removeNotification(notification_id), add = TRUE)
           xml2::write_xml(rv_model$cur_xmile, file)
         }
       )
-      outputOptions(output, "downloadButton", suspendWhenHidden = FALSE)
+      shiny::outputOptions(output, "downloadButton", suspendWhenHidden = FALSE)
       
       on_slider_event <- function(var, idx) {
         if (is.null(rv_model$cur_params)) return();
@@ -135,7 +136,7 @@ model_editor_server <- function(id) {
           print("Reverting xmile changes!")
           rv_model$cur_params <- rv_model$xmile_params
           rv_changed(FALSE)
-          update_sliders_for_params(isolate(rv_model$cur_params))        
+          update_sliders_for_params(shiny::isolate(rv_model$cur_params))        
         }
       )
 

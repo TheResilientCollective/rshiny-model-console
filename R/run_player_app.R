@@ -5,6 +5,6 @@
 #' @export
 run_player_app <- function() {
   shiny::runApp(
-    appDir = system.file("player_app", package="resilientgames")
+    appDir = system.file("apps/player", package="resilientgames")
   )
 }

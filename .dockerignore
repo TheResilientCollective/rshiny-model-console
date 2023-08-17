@@ -1,0 +1,8 @@
+# Files to ignore when copying this directory into the docker image
+
+*.Rproj
+.Rproj.user
+.RData
+.RHistory
+
+./output

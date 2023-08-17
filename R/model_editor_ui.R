@@ -14,6 +14,7 @@
 #' @family Controller Modules
 #' 
 #' @param id Application identifier.
+#' @export
 model_editor_ui <- function(id) {
   ns <- shiny::NS(id)
   shiny::fluidRow(
@@ -32,24 +33,24 @@ model_editor_ui <- function(id) {
                           label = "Revert",
                           icon = shiny::icon("clock-rotate-left")
       ),
-      sliderInput(ns("misinformation_capacity"),
-                  "Misinformation Capacity",
-                  min = 0,
-                  max = 1.0,
-                  step = 0.01,
-                  value = 0.5),
-      sliderInput(ns("infectivity"),
-                  "Infectivity",
-                  min = 0,
-                  max = 1.0,
-                  step = 0.01,
-                  value = 0.5),
-      sliderInput(ns("baseline_contact_rate"),
-                  "Baseline Contact Rate",
-                  min = 0,
-                  max = 1.0,
-                  step = 0.01,
-                  value = 0.5)
+      shiny::sliderInput(ns("misinformation_capacity"),
+                         "Misinformation Capacity",
+                         min = 0,
+                         max = 1.0,
+                         step = 0.01,
+                         value = 0.5),
+      shiny::sliderInput(ns("infectivity"),
+                         "Infectivity",
+                         min = 0,
+                         max = 1.0,
+                         step = 0.01,
+                         value = 0.5),
+      shiny::sliderInput(ns("baseline_contact_rate"),
+                         "Baseline Contact Rate",
+                         min = 0,
+                         max = 1.0,
+                         step = 0.01,
+                         value = 0.5)
     ),  # column
     shiny::column(
       9,

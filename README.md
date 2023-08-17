@@ -30,13 +30,13 @@ access. The intent is for the apps to be run together, operating with a
 common model, whose state is contained in a single xml file. Here is a
 quick rundown of the apps, more detailed descriptions below.
 
-- `status_app`
+- `status`
   - a single non-interactive view which shows vital details for players
-- `newsfeed_app`
+- `newsfeed`
   - a single non-interactive view of game updates and related media
-- `player_app`
+- `player`
   - a combined view with the content of both *status* and *newsfeed*
-- `control_app`
+- `controller`
   - an interactive view for game interpreters to control the game state
 
 ## Status Application
@@ -74,3 +74,26 @@ preview of newsfeed as seen by players - publish (this writes current
 content to the RDS file) - status view - show current version based on
 state in model editor - indicate whether the state has been published or
 not - button to publish (write to shared RDS file)
+
+## Docker and server
+
+There is a Dockerfile located in inst/serve which builds an instance for
+running shiny server, using the configuration file in the same
+directory. To build the docker image named `${IMAGE}` (you must build
+from this top level directory):
+
+``` r
+docker build -t ${IMAGE} -f inst/serve/Dockerfile .
+```
+
+To run a container (instance of image) after image is built:
+
+``` r
+docker run -ti --user shiny --rm -p 3838:3838 --name ${CONTAINER} ${IMAGE}
+```
+
+To open a bash shell inside the container once running:
+
+``` r
+docker exec -ti ${CONTAINER} /bin/bash
+```
