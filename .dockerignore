@@ -5,4 +5,6 @@
 .RData
 .RHistory
 
-./output
+.git
+
+./inst/serve

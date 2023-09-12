@@ -1,0 +1,28 @@
+version: "3"
+
+# This allows read/write access in the container
+volumes:
+  logs:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./shinyproxy-logs
+      o: bind
+services:
+  shinyproxy:
+    image: rishig32/resilient-proxy
+    container_name: resilient-proxy
+    restart: on-failure
+    build: ./proxy
+    networks:
+      - resilient-proxy-net
+    ports:
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - logs:/opt/shinyproxy/container-logs
+    user: "shinyproxy:${DOCKERGRP}"
+
+networks:
+  resilient-proxy-net:
+    name: resilient-proxy-net

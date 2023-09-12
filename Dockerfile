@@ -16,19 +16,14 @@ RUN apt-get update && apt-get install -y libxml2-dev less
 ADD . /srv/resilient-games
 WORKDIR /srv/resilient-games
 
-# copy files into the image
-COPY ./inst/serve/shiny-server.conf /etc/shiny-server/shiny-server.conf
-
 RUN installGithub.r TheResilientCollective/Resilient-readsdr@constant-modifier
 
 # NOTE: this has to run in the resilient-games directory (needs ./DESCRIPTION)
 RUN install2.r --error remotes
 RUN Rscript -e "remotes::install_deps()"
 
-
 RUN R -e "install.packages('/srv/resilient-games', repos=NULL, type='source')"
-RUN mkdir /srv/resilient-games/output
-RUN chown shiny:shiny /srv/resilient-games/output
 
-# run app
-CMD ["/usr/bin/shiny-server"]
+COPY Rprofile.site /usr/local/lib/R/etc/
+
+EXPOSE 3838

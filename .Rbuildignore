@@ -4,3 +4,7 @@
 ^README\.Rmd$
 ^.dockerignore$
 ^output$
+^Dockerfile$
+^Rprofile\.site$
+^compose\.yml$
+shinyproxy-logs
