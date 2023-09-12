@@ -75,25 +75,41 @@ content to the RDS file) - status view - show current version based on
 state in model editor - indicate whether the state has been published or
 not - button to publish (write to shared RDS file)
 
-## Docker and server
+## Docker and proxy
 
-There is a Dockerfile located in inst/serve which builds an instance for
-running shiny server, using the configuration file in the same
-directory. To build the docker image named `${IMAGE}` (you must build
-from this top level directory):
+We use ShinyProxy to provide an authentication layer and serve the apps
+within a docker network. This is for deployment and deployment testing
+only. For shiny development, just run locally in R, or use RStudio,
+which has it’s own single-page browser. Here we describe the docker
+infrastructure from the ground up:
 
-``` r
-docker build -t ${IMAGE} -f inst/serve/Dockerfile .
-```
+- `resilient-apps` is a docker image defined by `./Dockerfile`
+  containing the shiny apps exposed on port 3838
+- `resilient-proxy` is a docker image defined by
+  `inst/serve/proxy/Dockerfile` and `inst/serve/proxy/application.yml`
+  which
+  - runs the proxy server
+  - handles authentication and access permissions
+  - serves the shiny apps by spinning up containers from
+    `resilient-apps`, one container per app
+- `./compose.yml` creates a network and spins up the resilient proxy
+  container
+  - the user in the proxy container needs access to /var/run/docker.sock
+    for creating images
+  - this is set from the DOCKERGRP env variable, which can be set on the
+    command line
 
-To run a container (instance of image) after image is built:
+Command to run (tested on ubuntu):
+`sudo DOCKERGRP=$(getent group docker | cut -d: -f3) docker compose -f inst/serve/compose.yml up`
 
-``` r
-docker run -ti --user shiny --rm -p 3838:3838 --name ${CONTAINER} ${IMAGE}
-```
+### Development mode on osx
 
-To open a bash shell inside the container once running:
-
-``` r
-docker exec -ti ${CONTAINER} /bin/bash
-```
+To run this on a mac some changes have to be made: - add
+`url: http://host.docker.internal:2375` under `proxy.docker` in
+application.yml - build the proxy image - NOTE: this is pre-built at
+rishig32/resilient-proxy-osx - will have to be rebuilt for any changes
+to the proxy application.yml -
+`sudo docker build . -t rishig32/resilient-proxy-osx` in that dir after
+adding the url - run with
+`sudo docker compose -f inst/serve/compose.yml -f inst/serve/compose-osx.yml up` -
+NOTE: `DOCKERGRP` not required, but will raise a warning
