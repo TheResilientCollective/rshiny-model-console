@@ -52,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: /inst/serve/Dockerfile
+          file: inst/serve/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           #          tags: nsfearthcube/ec_facets_client:latest
