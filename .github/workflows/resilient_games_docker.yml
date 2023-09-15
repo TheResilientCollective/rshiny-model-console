@@ -2,7 +2,7 @@ name: Dockerize  Resilient  RShiny
 on:
   push:
     branches:
-      - master
+      - main
       - dockerhub_setup
 # https://github.com/marketplace/actions/publish-docker
 # https://github.com/docker/build-push-action
