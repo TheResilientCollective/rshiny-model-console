@@ -49,9 +49,10 @@ jobs:
             type=semver,pattern={{version}}
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v5
         with:
-          context: ./inst/serve
+          context: .
+          file: /inst/serve/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           #          tags: nsfearthcube/ec_facets_client:latest
