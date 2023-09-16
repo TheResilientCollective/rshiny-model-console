@@ -13,7 +13,8 @@ persistent_data_path(fname)
 Path to the file.  Still may not exist, but directory should.
 }
 \description{
-Persistent data file goes in project's "output" directory, create if needed.
+Persistent data file goes in data directory specified in options.
+Create if needed.
 }
 \seealso{
 Other Shared Data Methods: 
