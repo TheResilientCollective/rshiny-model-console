@@ -20,7 +20,8 @@ proxy:
   docker:
     internal-networking: true
     url: ${SHINYPROXY_DOCKER_PROXY}
-    # url: http://host.docker.internal:2375
+    # url: http://localhost:2375
+    #url: http://host.docker.internal:2375
     #url: unix:///var/run/docker.sock
     port-range-start: 20000
   specs:

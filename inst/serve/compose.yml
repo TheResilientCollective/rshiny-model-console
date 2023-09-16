@@ -1,4 +1,4 @@
-version: "3"
+version: "3.9"
 
 # This allows read/write access in the container
 volumes:
@@ -6,14 +6,21 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: ./shinyproxy-logs
+      device: ./logs
       o: bind
+configs:
+  shinyproxy_application:
+   # external: true
+    name:   ${SHINYPROXY_CONFIG_NAME:-shinyproxy_application}
+    file: ./proxy/${SHINYPROXY_APPLICATION:-application.yml}
 services:
   shinyproxy:
-    image: rishig32/resilient-proxy
+    image: resilientucsd/resilient-games-proxy
     container_name: resilient-proxy
     restart: on-failure
     build: ./proxy
+    env_file:
+      - .env
     networks:
       - resilient-proxy-net
     ports:
@@ -21,7 +28,16 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - logs:/opt/shinyproxy/container-logs
+    #  -  ./proxy/application.yml:/opt/shinyproxy/application.yml
+    configs: &configs
+      - source: shinyproxy_application
+        target: /opt/shinyproxy/application.yml
+        # uid: "103"
+        # gid: "103"
+        mode:
+          0444
     user: "shinyproxy:${DOCKERGRP}"
+
 
 networks:
   resilient-proxy-net:

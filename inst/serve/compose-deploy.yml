@@ -1,0 +1,52 @@
+# This connects tcp:2375 to the docker socket to enable docker containers to
+# talk to the docker daemon (allows spinning up new containers on the fly).
+version: "3.9"
+networks:
+  radx:
+    external: true
+  resilient-proxy-net:
+    name: resilient-proxy-net
+volumes:
+    logs:
+      driver: local
+      driver_opts:
+        type: none
+        device: ./logs
+        o: bind
+configs:
+    shinyproxy_application:
+      # external: true
+      name: ${SHINYPROXY_CONFIG_NAME:-shinyproxy_application}
+      file: ./proxy/${SHINYPROXY_APPLICATION:-application.yml}
+services:
+  shinyproxy:
+    image: resilientucsd/resilient-games-proxy
+    container_name: resilient-proxy
+    restart: on-failure
+    build: ./proxy
+    env_file:
+      - ${SHINYPROXY_ENV:-rshiny.env}
+    networks:
+      - radx
+      - resilient-proxy-net
+#    ports:
+#      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - logs:/opt/shinyproxy/container-logs
+    user: "shinyproxy:${DOCKERGRP}"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rg.entrypoints=http"
+      - "traefik.http.routers.rg.priority=13"
+      - "traefik.http.routers.rg.rule=Host(`resilient-games.radxlab.org`)"
+      - "traefik.http.middlewares.rg-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.rg.middlewares=rg-https-redirect"
+      - "traefik.http.routers.rg-secure.entrypoints=https"
+      - "traefik.http.routers.rg-secure.priority=12"
+      - "traefik.http.routers.rg-secure.rule=Host(`resilient-games.radxlab.org`)"
+      - "traefik.http.routers.rg-secure.tls=true"
+      - "traefik.http.routers.rg-secure.tls.certresolver=httpresolver"
+      - "traefik.http.routers.rg-secure.service=rg"
+      - "traefik.http.services.rg.loadbalancer.server.port=8080"
+      - "traefik.docker.network=radx"

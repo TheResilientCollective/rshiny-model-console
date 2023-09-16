@@ -1,9 +1,9 @@
-name: Dockerize  Resilient  RShiny
+name: Dockerize App Resilient  RShiny
 on:
   push:
     branches:
       - main
-      - dockerhub_setup
+      - dockerhub2
 # https://github.com/marketplace/actions/publish-docker
 # https://github.com/docker/build-push-action
 defaults:
@@ -40,7 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: resilientucsd/resilient-games
+          images: resilientucsd/resilient-games-app
           flavor: |
             latest=true
           tags: |
@@ -52,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: inst/serve/Dockerfile
+          file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           #          tags: nsfearthcube/ec_facets_client:latest
