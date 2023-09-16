@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - dockerhub_setup
+      - dockerhub
 # https://github.com/marketplace/actions/publish-docker
 # https://github.com/docker/build-push-action
 defaults:
@@ -52,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: inst/serve/Dockerfile
+          file: inst/serve/proxy/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           #          tags: nsfearthcube/ec_facets_client:latest
