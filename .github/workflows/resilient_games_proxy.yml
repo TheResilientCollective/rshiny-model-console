@@ -40,7 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: resilientucsd/resilient-games
+          images: resilientucsd/resilient-games-proxy
           flavor: |
             latest=true
           tags: |

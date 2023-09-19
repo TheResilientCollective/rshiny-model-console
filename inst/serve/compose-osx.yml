@@ -17,7 +17,7 @@ services:
     extends:
       file: docker-compose.yml
       service: shinyproxy
-    image: rishig32/resilient-proxy-osx
+    image: resilientucsd/resilient-games-proxy
     build: none
     depends_on:
       - socat

@@ -10,7 +10,7 @@ volumes:
       o: bind
 services:
   shinyproxy:
-    image: rishig32/resilient-proxy
+    image: resilientucsd/resilient-games-proxy
     container_name: resilient-proxy
     restart: on-failure
     build: ./proxy

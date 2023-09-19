@@ -9,13 +9,13 @@ proxy:
   admin-groups: admins
   users:
   - name: gm
-    password: 
+    password:
     groups: gms
   - name: player
-    password: 
+    password:
     groups: playas
   - name: admin
-    password: 
+    password:
     groups: [gms, playas, admins]
   docker:
     internal-networking: true
@@ -26,7 +26,7 @@ proxy:
     container-cmd: [
     "R", "-e", "resilientgames::run_one_app(\"controller\", \"/srv/resilient-games/output\")"
     ]
-    container-image: rishig32/resilient-apps
+    container-image: resilientucsd/resilient-games-app
     container-network: resilient-proxy-net
     container-volumes:
       - resilient-games:/srv/resilient-games/output
@@ -38,7 +38,7 @@ proxy:
     container-cmd: [
     "R", "-e", "resilientgames::run_one_app(\"newsfeed\", \"/srv/resilient-games/output\")"
     ]
-    container-image: rishig32/resilient-apps
+    container-image: resilientucsd/resilient-games-app
     container-network: resilient-proxy-net
     container-volumes:
       - resilient-games:/srv/resilient-games/output
@@ -50,7 +50,7 @@ proxy:
     container-cmd: [
     "R", "-e", "resilientgames::run_one_app(\"status\", \"/srv/resilient-games/output\")"
     ]
-    container-image: rishig32/resilient-apps
+    container-image: resilientucsd/resilient-games-app
     container-network: resilient-proxy-net
     container-volumes:
       - resilient-games:/srv/resilient-games/output
@@ -62,7 +62,7 @@ proxy:
     container-cmd: [
     "R", "-e", "resilientgames::run_one_app(\"player\", \"/srv/resilient-games/output\")"
     ]
-    container-image: rishig32/resilient-apps
+    container-image: resilientucsd/resilient-games-app
     container-network: resilient-proxy-net
     container-volumes:
       - resilient-games:/srv/resilient-games/output
