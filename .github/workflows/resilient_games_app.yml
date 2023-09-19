@@ -1,4 +1,4 @@
-name: Dockerize  Resilient  RShiny
+name: Dockerize App Resilient  RShiny
 on:
   push:
     branches:
