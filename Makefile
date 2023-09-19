@@ -3,13 +3,13 @@
 #
 
 VERSION :=`cat VERSION`
-MAINVERSION :=`cat ../../VERSION`
+MAINVERSION :=`cat ../../../VERSION`
 
 build: proxy, apps
 
 proxy:
 	cd inst/serve/proxy ; \
-	docker build  --tag="resilientucsd/resilient-games-proxy"  --file=./Dockerfile . ; \
+	docker build  --tag="resilientucsd/resilient-games-proxy:$(MAINVERSION)"  --file=./Dockerfile . ; \
 	docker tag resilientucsd/resilient-games-proxy:$(MAINVERSION) resilientucsd/resilient-games-proxy:latest
 apps:
 	docker build  --tag="resilientucsd/resilient-games-app"  --file=./Dockerfile . ; \

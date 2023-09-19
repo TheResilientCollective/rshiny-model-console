@@ -8,7 +8,7 @@ on:
 # https://github.com/docker/build-push-action
 defaults:
   run:
-    working-directory: ./inst/serve
+    working-directory: ./inst/serve/proxy
 jobs:
   deploy:
     name: Dockerize Games RShiny
