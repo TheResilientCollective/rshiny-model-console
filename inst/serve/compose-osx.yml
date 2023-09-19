@@ -19,5 +19,10 @@ services:
       service: shinyproxy
     image: resilientucsd/resilient-games-proxy
     build: none
+    user: "shinyproxy:${DOCKERGRP}"
     depends_on:
       - socat
+networks:
+  resilient-proxy-net:
+    name: resilient-proxy-net
+

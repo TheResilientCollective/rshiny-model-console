@@ -1,13 +1,13 @@
 version: "3.8"
 
 # This allows read/write access in the container
-volumes:
-  logs:
-    driver: local
-    driver_opts:
-      type: none
-      device: ./shinyproxy-logs
-      o: bind
+#volumes:
+#  logs:
+#    driver: local
+#    driver_opts:
+#      type: none
+#      device: ./shinyproxy-logs
+#      o: bind
 services:
   shinyproxy:
     image: resilientucsd/resilient-games-proxy
@@ -20,9 +20,9 @@ services:
       - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - logs:/opt/shinyproxy/container-logs
+      - ./logs:/opt/shinyproxy/container-logs
       -  ./proxy/application.yml:/opt/shinyproxy/application.yml
-    user: "shinyproxy:${DOCKERGRP}"
+    user: "shinyproxy:${DOCKERGRP:-docker}"
 
 networks:
   resilient-proxy-net:
