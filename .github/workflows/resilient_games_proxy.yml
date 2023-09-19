@@ -51,8 +51,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v5
         with:
-          context: ./inst/serve
-          file: ./proxy/Dockerfile
+          context: ./inst/serve/proxy
+          file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           #          tags: nsfearthcube/ec_facets_client:latest
