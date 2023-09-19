@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 # This allows read/write access in the container
 volumes:
@@ -21,6 +21,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - logs:/opt/shinyproxy/container-logs
+      -  ./proxy/application.yml:/opt/shinyproxy/application.yml
     user: "shinyproxy:${DOCKERGRP}"
 
 networks:

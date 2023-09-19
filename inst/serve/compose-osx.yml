@@ -1,6 +1,6 @@
 # This connects tcp:2375 to the docker socket to enable docker containers to
 # talk to the docker daemon (allows spinning up new containers on the fly).
-version: "3"
+version: "3.9"
 services:
   socat:
     image: alpine/socat
@@ -15,7 +15,7 @@ services:
 
   shinyproxy:
     extends:
-      file: docker-compose.yml
+      file: compose.yml
       service: shinyproxy
     image: resilientucsd/resilient-games-proxy
     build: none
