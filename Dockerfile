@@ -17,9 +17,10 @@ ADD . /srv/resilient-games
 WORKDIR /srv/resilient-games
 
 RUN installGithub.r TheResilientCollective/Resilient-readsdr@constant-modifier
+#RUN R -e  'install_github('TheResilientCollective/Resilient-readsdr@constant-modifier')'
 
 # NOTE: this has to run in the resilient-games directory (needs ./DESCRIPTION)
-RUN install2.r --error remotes
+RUN R -e  'install2.r --error remotes
 RUN Rscript -e "remotes::install_deps()"
 
 RUN R -e "install.packages('/srv/resilient-games', repos=NULL, type='source')"
