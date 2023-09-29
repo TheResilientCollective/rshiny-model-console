@@ -99,6 +99,12 @@ infrastructure from the ground up:
   - this is set from the DOCKERGRP env variable, which can be set on the
     command line
 
+###  Service Deployment:  Configuring and Running
+* copy the example.env to .env
+* edit passwords, 
+    * if OSX, then set SHINYPROXY_DOCKER_PROXY=http://host.docker.internal:2375
+    * if other, then set SHINYPROXY_DOCKER_PROXY=http://localhost:2375
+
 Command to run (tested on ubuntu):
 `sudo DOCKERGRP=$(getent group docker | cut -d: -f3) docker compose -f inst/serve/compose.yml up`
 
