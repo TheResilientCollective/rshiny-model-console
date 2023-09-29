@@ -13,4 +13,4 @@ proxy:
 	docker tag resilientucsd/resilient-games-proxy:$(MAINVERSION) resilientucsd/resilient-games-proxy:latest
 apps:
 	docker build  --tag="resilientucsd/resilient-games-app"  --file=./Dockerfile . ; \
-	docker tag resilientucsd/resilient-games-app:$(MAINVERSION) resilientucsd/resilient-games-app:latest
+	docker tag resilientucsd/resilient-games-app:$(VERSION) resilientucsd/resilient-games-app:latest
