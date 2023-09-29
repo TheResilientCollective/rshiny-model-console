@@ -99,7 +99,15 @@ infrastructure from the ground up:
   - this is set from the DOCKERGRP env variable, which can be set on the
     command line
 
-###  Service Deployment:  Configuring and Running
+### 
+###  Service Deployment:  
+#### CI and Github actions
+ containers for resilientucsd/resilient-games-proxy and resilientucsd/resilient-games-app
+ are created using github actions.
+If you are running on a non-main branch, edit .github/workflows/resilient*.yml and add the branch.
+
+
+#### Configuring and Running
 * copy the example.env to .env
 * edit passwords, 
     * if OSX, then set SHINYPROXY_DOCKER_PROXY=http://host.docker.internal:2375

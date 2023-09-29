@@ -38,6 +38,7 @@ services:
           0444
     user: "shinyproxy:${DOCKERGRP}"
 
+
 networks:
   resilient-proxy-net:
     name: resilient-proxy-net
