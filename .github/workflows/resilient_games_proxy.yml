@@ -8,7 +8,7 @@ on:
 # https://github.com/docker/build-push-action
 defaults:
   run:
-    working-directory: ./inst/serve/proxy
+    working-directory: .
 jobs:
   deploy:
     name: Dockerize  RShiny proxy
@@ -52,7 +52,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./inst/serve/proxy
-          file: Dockerfile
+          file: ./inst/serve/proxy/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           #          tags: nsfearthcube/ec_facets_client:latest
