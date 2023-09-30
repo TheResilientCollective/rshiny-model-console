@@ -24,6 +24,6 @@ RUN Rscript -e "remotes::install_deps()"
 
 RUN R -e "install.packages('/srv/resilient-games', repos=NULL, type='source')"
 
-COPY Rprofile.site /usr/local/lib/R/etc/
+COPY ./Rprofile.site /usr/local/lib/R/etc/
 
 EXPOSE 3838

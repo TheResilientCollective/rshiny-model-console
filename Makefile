@@ -17,6 +17,6 @@ apps:
 	docker tag resilientucsd/resilient-games-app:$(VERSION) resilientucsd/resilient-games-app:latest
 
 push:
-    echo "You may need to 'docker login'" ;\
+	echo "You may need to 'docker login'" ;\
 	docker push -a resilientucsd/resilient-games-app  ; \
 	docker push -a resilientucsd/resilient-games-proxy
