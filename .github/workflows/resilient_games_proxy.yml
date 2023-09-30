@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - dockerhub
+      - dockerhub2
 # https://github.com/marketplace/actions/publish-docker
 # https://github.com/docker/build-push-action
 defaults:
