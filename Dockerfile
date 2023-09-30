@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y libxml2-dev less
 ADD . /srv/resilient-games
 WORKDIR /srv/resilient-games
 
-RUN installGithub.r TheResilientCollective/Resilient-readsdr@constant-modifier
+RUN installGithub.r TheResilientCollective/Resilient-readsdr
 
 # NOTE: this has to run in the resilient-games directory (needs ./DESCRIPTION)
 RUN install2.r --error remotes
