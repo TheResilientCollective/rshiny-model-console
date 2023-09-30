@@ -14,10 +14,6 @@ jobs:
     name: Dockerize  RShiny proxy
     runs-on: ubuntu-latest
     steps:
-      - name: Set variables
-        run: |
-            VER=$(cat VERSION)
-            echo "VERSION=$VER" >> $GITHUB_ENV
       - name: Checkout Repo
         uses: actions/checkout@v3
       - name: Create Node Environment
@@ -50,7 +46,7 @@ jobs:
           tags: |
             type=ref,event=tag
             type=ref,event=branch
-            type=semver,pattern=${{ env.VERSION }}
+            type=semver,pattern={{version}}
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v5

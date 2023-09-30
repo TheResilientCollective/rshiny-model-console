@@ -10,13 +10,12 @@ build: proxy apps
 proxy:
 	cd inst/serve ; \
 	docker build  --tag="resilientucsd/resilient-games-proxy"  --file=./proxy/Dockerfile . ; \
-	docker tag resilientucsd/resilient-games-proxy resilientucsd/resilient-games-proxy:latest ; \
-	docker tag resilientucsd/resilient-games-proxy resilientucsd/resilient-games-proxy:$(MAINVERSION)
+	docker tag resilientucsd/resilient-games-proxy:$(MAINVERSION) resilientucsd/resilient-games-proxy:latest
 
 apps:
 	docker build  --tag="resilientucsd/resilient-games-app"  --file=./Dockerfile . ; \
-	docker tag resilientucsd/resilient-games-app resilientucsd/resilient-games-app:latest ; \
-	docker tag resilientucsd/resilient-games-app resilientucsd/resilient-games-app:$(VERSION)
+	docker tag resilientucsd/resilient-games-app:$(VERSION) resilientucsd/resilient-games-app:latest
+
 push:
 	echo "You may need to 'docker login'" ;\
 	docker push -a resilientucsd/resilient-games-app  ; \
