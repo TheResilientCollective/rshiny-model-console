@@ -24,6 +24,8 @@ services:
     container_name: resilient-proxy
     restart: on-failure
     build: ./proxy
+    env_file:
+      - ${SHINYPROXY_ENV:-rshiny.env}
     networks:
       - radx
       - resilient-proxy-net
@@ -32,6 +34,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - logs:/opt/shinyproxy/container-logs
+    user: "shinyproxy:${DOCKERGRP}"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.rg.entrypoints=http"

@@ -5,3 +5,7 @@
 .Ruserdata
 .Rproj.user
 output
+
+rshiny.env
+.env
+/inst/serve/rshiny.env
