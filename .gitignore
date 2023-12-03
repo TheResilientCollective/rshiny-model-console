@@ -1,9 +1,14 @@
 *.Rproj
 .Rproj.user
 .Rhistory
+.Rprofile
 .RData
 .Ruserdata
 .Rproj.user
+.pre-commit-config.yaml
+.lintr
+renv
+renv.lock
 output
 
 rshiny.env
