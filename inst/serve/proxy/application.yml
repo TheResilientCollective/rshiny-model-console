@@ -11,12 +11,9 @@ proxy:
     - name: gm
       password: ${SHINYPROXY_GM_PASS}
       groups: gms
-    - name: player
-      password: ${SHINYPROXY_PLAYER_PASS}
-      groups: playas
     - name: admin
       password:  ${SHINYPROXY_ADMIN_PASS}
-      groups: [gms, playas, admins]
+      groups: [gms, admins]
   docker:
     internal-networking: true
     url: ${SHINYPROXY_DOCKER_PROXY}
@@ -36,42 +33,6 @@ proxy:
       - resilient-games:/srv/resilient-games/output
     access-groups:
       - gms
-  - id: newsfeed_app
-    display-name: Newsfeed View
-    description: Application for viewing in game newsfeed content
-    container-cmd: [
-    "R", "-e", "resilientgames::run_one_app(\"newsfeed\", \"/srv/resilient-games/output\")"
-    ]
-    container-image: resilientucsd/resilient-games-app
-    container-network: resilient-proxy-net
-    container-volumes:
-      - resilient-games:/srv/resilient-games/output
-    access-groups:
-      - playas
-  - id: status_app
-    display-name: Status View
-    description: Application for viewing game status updates
-    container-cmd: [
-    "R", "-e", "resilientgames::run_one_app(\"status\", \"/srv/resilient-games/output\")"
-    ]
-    container-image: resilientucsd/resilient-games-app
-    container-network: resilient-proxy-net
-    container-volumes:
-      - resilient-games:/srv/resilient-games/output
-    access-groups:
-      - playas
-  - id: player_app
-    display-name: Player View
-    description: Application for viewing newsfeed and status on one page
-    container-cmd: [
-    "R", "-e", "resilientgames::run_one_app(\"player\", \"/srv/resilient-games/output\")"
-    ]
-    container-image: resilientucsd/resilient-games-app
-    container-network: resilient-proxy-net
-    container-volumes:
-      - resilient-games:/srv/resilient-games/output
-    access-groups:
-      - playas
 logging:
   file:
     name: resilient-games.log

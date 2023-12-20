@@ -4,11 +4,8 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Rishi", "Graham", , "regraham@health.ucsd.edu", 
            role = c("aut", "cre"))
-Description: This package defines four interconnected shiny apps for running
-    web based Resilient Community Games.  The applications are designed to 
-    enable a subset of users (interpreters) to view, edit, and run a community 
-    model while other users (players) view an overview of model state and timely
-    "news" media curated by the interpreters.
+Description: This package defines a shiny app for editing, running, and
+    visualizing the Resilient Community Games Dynamic Systems Model.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -31,3 +28,5 @@ Imports:
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+URL: https://github.com/TheResilientCollective/rshiny-model-console
+BugReports: https://github.com/TheResilientCollective/rshiny-model-console/issues
