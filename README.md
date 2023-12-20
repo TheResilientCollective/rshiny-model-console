@@ -100,30 +100,38 @@ infrastructure from the ground up:
     command line
 
 ### 
-###  Service Deployment:  
-#### CI and Github actions
- containers for resilientucsd/resilient-games-proxy and resilientucsd/resilient-games-app
- are created using github actions.
-If you are running on a non-main branch, edit .github/workflows/resilient*.yml and add the branch.
 
+### Service Deployment:
+
+#### CI and Github actions
+
+containers for resilientucsd/resilient-games-proxy and
+resilientucsd/resilient-games-app are created using github actions. If
+you are running on a non-main branch, edit
+.github/workflows/resilient\*.yml and add the branch.
 
 #### Configuring and Running
-* copy the example.env to rshiny.env
-  * this is fixed on the compose file, for now.
-* edit PROXY in env, and set passwords, 
-    * if OSX, then set `SHINYPROXY_DOCKER_PROXY=http://host.docker.internal:2375`
-    * if other, then set `SHINYPROXY_DOCKER_PROXY=unix:///var/run/docker.sock`
-           see https://gist.github.com/styblope/dc55e0ad2a9848f2cc3307d4819d819f`
-      * (localhost from a container is localhost)
-      * you need to set DOCKERGRP= (some number)
-          * `getent group docker | cut -d: -f3`
-      * valume needs to be mapped into the container as a volume 
-  ```yaml
-  volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-  ``` 
+
+- copy the example.env to rshiny.env
+  - this is fixed on the compose file, for now.
+- edit PROXY in env, and set passwords,
+  - if OSX, then set
+    `SHINYPROXY_DOCKER_PROXY=http://host.docker.internal:2375`
+  - if other, then set
+    `SHINYPROXY_DOCKER_PROXY=unix:///var/run/docker.sock` see
+    `https://gist.github.com/styblope/dc55e0ad2a9848f2cc3307d4819d819f`
+    - (localhost from a container is localhost)
+    - you need to set DOCKERGRP= (some number)
+      - `getent group docker | cut -d: -f3`
+    - volume needs to be mapped into the container as a volume
+
+    ``` yaml
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    ```
 
 ### command to run just the rshiny
+
 `docker compose --env-file rshiny.env -f rshiny_compose_deploy.yaml up`
 
 Command to run (tested on ubuntu):
