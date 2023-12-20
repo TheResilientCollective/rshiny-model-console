@@ -1,5 +1,5 @@
 Package: resilientgames
-Title: Shiny Apps For Resilient Community Games
+Title: Shiny Apps for Resilient Community Games
 Version: 0.0.0.9000
 Authors@R: 
     person("Rishi", "Graham", , "regraham@health.ucsd.edu", 
@@ -11,8 +11,6 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
-    assertthat,
-    dplyr,
     DT,
     fs,
     magrittr,
@@ -20,12 +18,12 @@ Imports:
     readsdr,
     rlang,
     shiny,
-    shinydashboard,
     shinyjs,
     usethis,
     withr,
     xml2
-Suggests: 
+Remotes: readsdr=TheResilientCollective/Resilient-readsdr
+Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://github.com/TheResilientCollective/rshiny-model-console
