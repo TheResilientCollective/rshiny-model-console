@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/TheResilientCollective/rshiny-model-console/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/TheResilientCollective/rshiny-model-console/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 This package defines a shiny app for web based editing, running, and visualizing
@@ -37,6 +38,7 @@ This web tool allows users to upload an RCDSM in the form of an xmile file,
 modify parameters, and download the modified xmile.
 
 The control view is made up of the following functional tabs:
+
 - parameters
   - upload model file
   - edit model parameters
